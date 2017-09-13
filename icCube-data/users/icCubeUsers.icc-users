@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users revisionNumber="1" version="1">
+    <user name="admin" password="" hash="w4SLbUv6bzMUDK4p45w+6+2+yodETy6QWFJ5Zm2vCNs=$ysrDKBGB0ExXQN0p59sjSZigSPMQHrTKupjLcXDSbjM=">
+        <role>administrator</role>
+    </user>
+    <user name="demo" password="" hash="6eMl0xq0cPOvNptBZECfIQS5renM/SDqzC6I7l543Yc=$rMSdfhSC5nQVQt3BQO7PO+PbuqkJJaRyra35zTSFyAQ=">
+        <role>standard</role>
+    </user>
+</users>

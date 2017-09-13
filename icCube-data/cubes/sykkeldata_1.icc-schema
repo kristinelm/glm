@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schemaFactory revisionNumber="82">
+    <schemaDefinition name="sykkeldata" group="Default Group" loadOnStartup="false">
+        <activateIncrementalLoad>false</activateIncrementalLoad>
+        <useUnknownMembersInFacts>true</useUnknownMembersInFacts>
+        <autoCleanUpTableColumns>false</autoCleanUpTableColumns>
+        <useFactPartitioning>false</useFactPartitioning>
+        <fileCSV directory="C:/Users/Yngvild/Documents/Skule/Datagruvedrift/Øving1/" checkColumnSize="false" name="sykkeldata">
+            <csvDataTable csvseparator="," csvquotechar="&quot;" csvescape="\" csvstrictQuotes="false" csvignoreLeadingWhiteSpace="true" fileEncoding="UTF-8" partitioningStrategy="" tableName="sykkeldata.csv" rowLimit="-1" id="601b523d-0cfa-4193-9b99-cc2b02e755dd">
+                <column name="Date" tableType="STRING" type="DATE" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Trip_Id" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Start_Time" tableType="STRING" type="DATETIME" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Stop_Time" tableType="STRING" type="DATETIME" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Bike_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Trip_Duration" tableType="STRING" type="FLOAT" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="From_Station_Name" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="To_Station_Name" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="From_Station_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="To_Station_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="User_Type" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Gender" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Birth_Year" tableType="STRING" type="FLOAT" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Temperature_C" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Precipitation_Mm" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Wind_Speed_Kph" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Visibility_Km" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Humidity" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Weather_Events" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <addRowNumber>false</addRowNumber>
+                <stringDateConverter>MM/dd/yyyy</stringDateConverter>
+                <trimStrings>true</trimStrings>
+                <columnSeparator>,</columnSeparator>
+                <commentMarker>#</commentMarker>
+            </csvDataTable>
+        </fileCSV>
+        <timeWizardDimension isDefaultTimeDimension="true" isIndexingByRange="false" from="2014-01-01T00:00:00.000" to="2016-09-09T00:00:00.000" dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" unknownMemberName="" id="68ff22e1-4669-40c4-89c0-9714b76b26d3" name="Time">
+            <timeHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="Time" isDefault="true" defaultMemberName="">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level name="Year" type="YEAR">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+                <level name="Half Year" type="HALF_YEAR">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+                <level name="Quarter" type="QUARTER">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+                <level name="Month" type="MONTH">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+                <level name="Week" type="WEEK">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+                <level name="Day" type="DAY">
+                    <useRelativeKey>false</useRelativeKey>
+                </level>
+            </timeHierarchy>
+        </timeWizardDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="5d1f4c87-22f2-463e-bb6e-eea23d93beef" name="Gender">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="Gender" isDefault="true">
+                <level name="Gender" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="Gender"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="1223a52f-bca6-428b-a070-ae2d17e6e5a6" name="Bike_Id">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="Bike_Id" isDefault="true" defaultMemberName="">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level name="Bike_Id" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="Bike_Id"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="c88e628f-e1a8-44ac-a066-99c1f3ebd98a" name="Birth_year">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="Birth_year" isDefault="true">
+                <level name="Birth_Year" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="Birth_Year"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="71453a5d-edab-417c-a268-7f3ce7a1d7b1" name="User_type">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="User_type" isDefault="true">
+                <level name="User_Type" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="User_Type"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="b2cb6ea8-beb2-4403-8ad0-d6904ad53a2f" name="To_Station">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="To_Station_Name" isDefault="true" defaultMemberName="">
+                <factAggregationType>MEMBER_AND_ANCESTORS</factAggregationType>
+                <level name="To_Station_Name" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="To_Station_Name"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="fa8c1393-25ef-422d-aeb0-91a01d4bf91b" name="From_Station">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="From_Station" isDefault="true">
+                <level name="From_Station_Name" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="From_Station_Name"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <multiLevelDimension dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" isTimeDimension="false" isDefaultTimeDimension="false" isIndexingByRange="false" unknownMemberName="Unknown" id="f74c2ed9-cdd0-4bbd-89b5-3b042fb4233e" name="Weather_events">
+            <multiLevelHierarchy hasAllLevel="true" allLevelName="All-L" allMemberName="All-M" name="Weather_events" isDefault="true">
+                <level name="Weather_events" nameUnique="true" nameUniqueInParent="false" keyUnique="true" ignoreNameCollision="false">
+                    <nameCol name="Weather_Events"/>
+                    <orderType>NONE</orderType>
+                    <orderKind>ASC</orderKind>
+                </level>
+            </multiLevelHierarchy>
+        </multiLevelDimension>
+        <cube id="35bba65a-d4c7-4527-8572-a18a6f8cc9b1" name="Cube">
+            <calculatedMember uniqueName="[Measures].[Trip_duration_total_hours]">
+                <formula>[Measures].[Trip_duration_total]/3600</formula>
+                <cellProperties></cellProperties>
+            </calculatedMember>
+            <calculatedMember uniqueName="[Measures].[avg_trip_duration_minutes]">
+                <formula>[Measures].[avg_trip_duration]/60</formula>
+                <cellProperties></cellProperties>
+            </calculatedMember>
+            <calculatedMember uniqueName="[Measures].[Trip_duration_total_min]">
+                <formula>[Measures].[Trip_duration_total]/60</formula>
+                <cellProperties></cellProperties>
+            </calculatedMember>
+            <defaultFacts measureGroupName="Facts" partitioningLevelName="" newGeneration="true" dataTableId="601b523d-0cfa-4193-9b99-cc2b02e755dd" aggregateDataSourceFacts="false" unresolvedRowsBehavior="ERROR">
+                <rowFactAggregationType>ADD_ROW</rowFactAggregationType>
+                <measure name="Trip_count" aggregationType="COUNT">
+                    <rollupHierarchy></rollupHierarchy>
+                    <dataColumn name="Trip_Id"/>
+                    <cellProperties></cellProperties>
+                    <emptyIsZero>false</emptyIsZero>
+                </measure>
+                <measure name="Trip_duration_total" aggregationType="SUM">
+                    <rollupHierarchy></rollupHierarchy>
+                    <dataColumn name="Trip_Duration"/>
+                    <cellProperties></cellProperties>
+                    <emptyIsZero>false</emptyIsZero>
+                </measure>
+                <measure name="avg_trip_duration" aggregationType="AVG_LEAVES">
+                    <rollupHierarchy></rollupHierarchy>
+                    <dataColumn name="Trip_Duration"/>
+                    <cellProperties></cellProperties>
+                    <emptyIsZero>false</emptyIsZero>
+                </measure>
+                <links dimensionId="1223a52f-bca6-428b-a070-ae2d17e6e5a6">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="Bike_Id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="c88e628f-e1a8-44ac-a066-99c1f3ebd98a">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="Birth_Year"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="fa8c1393-25ef-422d-aeb0-91a01d4bf91b">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="From_Station_Name"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="5d1f4c87-22f2-463e-bb6e-eea23d93beef">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="Gender"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="68ff22e1-4669-40c4-89c0-9714b76b26d3">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="Date"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="b2cb6ea8-beb2-4403-8ad0-d6904ad53a2f">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="To_Station_Id"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="71453a5d-edab-417c-a268-7f3ce7a1d7b1">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="User_Type"/>
+                    </viewLinks>
+                </links>
+                <links dimensionId="f74c2ed9-cdd0-4bbd-89b5-3b042fb4233e">
+                    <viewLinks type="LAST_LEVEL">
+                        <toColumns name="Weather_Events"/>
+                    </viewLinks>
+                </links>
+            </defaultFacts>
+        </cube>
+    </schemaDefinition>
+</schemaFactory>

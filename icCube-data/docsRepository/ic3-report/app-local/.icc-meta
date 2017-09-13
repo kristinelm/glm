@@ -1,0 +1,5 @@
+caption:
+apply-inherited-permissions:true
+permissions-count:1
+permission-role:<everybody>
+permission-name:READ

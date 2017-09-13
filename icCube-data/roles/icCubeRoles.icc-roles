@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+    icCube list of roles (demonstration purpose).
+
+    When the icCube server is started for the first time, this file is going to be copied
+    to the application directory : /roles.
+
+    See /bin/icCube.xml for the location of the /roles directory.
+
+    See icCubeUsers.icc-users in this directory for the list of available users and their role mappings.
+-->
+
+<roles>
+    <role fullControl="true" name="anonymous"/>
+    <role fullControl="false" name="standard">
+        <applications>
+            <monitoring>
+                <feature enabled="false" name="app.monitoring.counters"/>
+                <feature enabled="false" name="app.monitoring.schemas"/>
+                <feature enabled="false" name="app.monitoring.requests"/>
+                <feature enabled="false" name="app.monitoring.users"/>
+                <feature enabled="false" name="app.monitoring.roles"/>
+                <feature enabled="true" name="app.monitoring.plugins"/>
+                <feature enabled="true" name="app.monitoring.configuration"/>
+            </monitoring>
+            <alert>
+                <feature enabled="true" name="app.alert.all"/>
+            </alert>
+            <builder>
+                <feature enabled="true" name="app.builder.all"/>
+            </builder>
+            <mdxIde>
+                <feature enabled="true" name="app.mdxIde.all"/>
+            </mdxIde>
+            <reportDocManagement>
+                <feature enabled="false" name="app.reportDocManagement.reader"/>
+                <feature enabled="true" name="app.reportDocManagement.editor"/>
+                <feature enabled="false" name="app.reportDocManagement.administrator"/>
+            </reportDocManagement>
+            <reportDashboard>
+                <feature enabled="false" name="app.reportDashboard.reader"/>
+                <feature enabled="false" name="app.reportDashboard.editorReader"/>
+                <feature enabled="true" name="app.reportDashboard.editor"/>
+            </reportDashboard>
+            <xmla>
+                <feature enabled="true" name="app.xmla.all"/>
+            </xmla>
+            <gvi>
+                <feature enabled="true" name="app.gvi.all"/>
+            </gvi>
+        </applications>
+        <schemas defaultSchemaAccess="WRITE">
+            <authorizedSchemaNames type="ALL"/>
+        </schemas>
+    </role>
+</roles>

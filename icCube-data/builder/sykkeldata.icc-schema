@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schemaFactory revisionNumber="13">
+    <schemaDefinition name="sykkeldata" description="" group="Default Group" loadOnStartup="true">
+        <activateIncrementalLoad>false</activateIncrementalLoad>
+        <useUnknownMembersInFacts>true</useUnknownMembersInFacts>
+        <autoCleanUpTableColumns>false</autoCleanUpTableColumns>
+        <useFactPartitioning>false</useFactPartitioning>
+        <callGarbageCollector>NONE</callGarbageCollector>
+        <backup>NONE</backup>
+        <nonEmptyCachePolicy>NONE</nonEmptyCachePolicy>
+        <nonEmptyCacheType>REGULAR</nonEmptyCacheType>
+        <nonEmptyCachePersistency>MEMORY</nonEmptyCachePersistency>
+        <storagePolicy>DEFAULT</storagePolicy>
+        <hierarchyUniqueNameStyle>IncludeDimensionName</hierarchyUniqueNameStyle>
+        <fileCSV directory="C:/Users/Yngvild/Documents/Skule/Datagruvedrift/Øving1/" checkColumnSize="true" name="sykkeldata">
+            <csvDataTable csvseparator="," csvquotechar="&quot;" csvescape="\" csvstrictQuotes="false" csvignoreLeadingWhiteSpace="true" fileEncoding="UTF-8" partitioningStrategy="" tableName="sykkeldata.csv" rowLimit="-1" id="2b67c236-fd99-420e-b219-037c7392be9a">
+                <column name="Date" tableType="STRING" type="DATE" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Trip_Id" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Start_Time" tableType="STRING" type="DATETIME" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Stop_Time" tableType="STRING" type="DATETIME" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Bike_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Trip_Duration" tableType="STRING" type="FLOAT" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="From_Station_Name" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="To_Station_Name" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="From_Station_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="To_Station_Id" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="User_Type" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Gender" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Birth_Year" tableType="STRING" type="DATETIME" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Temperature_C" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Precipitation_Mm" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Wind_Speed_Kph" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Visibility_Km" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Mean_Humidity" tableType="STRING" type="INTEGER" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <column name="Weather_Events" tableType="STRING" type="STRING" selected="true" primaryKey="false" nullObjectAsString=""/>
+                <addRowNumber>false</addRowNumber>
+                <stringDateConverter></stringDateConverter>
+                <trimStrings>true</trimStrings>
+                <columnSeparator>,</columnSeparator>
+                <commentMarker>#</commentMarker>
+            </csvDataTable>
+        </fileCSV>
+        <cube id="f242b316-60ac-4f43-a202-8cf48571ede6" name="Cube"/>
+        <localization enabled="false"/>
+        <script>
+            <content>-- 
+-- Drop all calc. members, sets and functions declared at schema/cube levels 
+-- 
+
+DROP *
+
+</content>
+        </script>
+    </schemaDefinition>
+</schemaFactory>

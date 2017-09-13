@@ -1,0 +1,54 @@
+{
+  "author": {
+    "name": "Pierre Curto"
+  },
+  "name": "lz4",
+  "description": "LZ4 streaming compression and decompression",
+  "keywords": [
+    "lz4",
+    "compression",
+    "decompression",
+    "stream"
+  ],
+  "version": "0.3.11",
+  "homepage": "http://github.com/pierrec/node-lz4",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pierrec/node-lz4.git"
+  },
+  "main": "./lib/lz4.js",
+  "bugs": {
+    "url": "http://github.com/pierrec/node-lz4/issues"
+  },
+  "gypfile": true,
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/pierrec/node-lz4/raw/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "dependencies": {
+    "xxhashjs": "latest",
+    "cuint": "latest"
+  },
+  "devDependencies": {
+    "benchmark": "*",
+    "browserify": ">= 3.x",
+    "karma": "^0.12.16",
+    "karma-chrome-launcher": "^0.1.3",
+    "karma-cli": "~0.0.4",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-jasmine": "^0.1.5",
+    "karma-mocha": "^0.1.3",
+    "minify": "latest",
+    "mocha": ">= 0.10"
+  },
+  "scripts": {
+    "test": "mocha",
+    "install": "node-gyp rebuild",
+    "prepublish": "./build.sh"
+  }
+}

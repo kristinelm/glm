@@ -1,0 +1,31 @@
+ContinentCode;ContinentName;CountryISO;CountryName;CityName
+OC;Oceania;AUS;Australia;Canberra
+AS;Asia;PAK;Pakistan;Islamabad
+AF;Africa;ZAF;South Africa;Pretoria
+EU;Europe;FRA;France;Paris
+AS;Asia;KOR;South Korea;Seoul
+AF;Africa;EGY;Egypt;Cairo
+EU;Europe;GBR;United Kingdom;London
+AS;Asia;TWN;Taiwan;Taipei
+AS;Asia;THA;Thailand;Bangkok
+EU;Europe;DEU;Germany;Berlin
+AS;Asia;SAU;Saudi Arabia;Riyadh
+EU;Europe;ITA;Italy;Rome
+AS;Asia;CHN;China;Beijing
+AS;Asia;JPN;Japan;Tokyo
+NA;North America;MEX;Mexico;Mexico City
+NA;North America;CAN;Canada;Ottawa
+AS;Asia;IDN;Indonesia;Jakarta
+AS;Asia;IND;India;New Delhi
+SA;South America;ARG;Argentina;Buenos Aires
+AS;Asia;IRN;Iran;Tehran
+SA;South America;COL;Colombia;Bogotá
+EU;Europe;NLD;Netherlands;Amsterdam
+AS;Asia;MYS;Malaysia;Kuala Lumpur
+AS;Asia;TUR;Turkey;Ankara
+EU;Europe;POL;Poland;Warsaw
+NA;North America;USA;United States;Washington
+EU;Europe;RUS;Russia;Moscow
+SA;South America;BRA;Brazil;Brasília
+EU;Europe;BEL;Belgium;Brussels
+EU;Europe;ESP;Spain;Madrid

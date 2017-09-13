@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mdxQuery>
+    <name>color palettes</name>
+    <mdx>WITH
+          /* available in sales schema
+            FUNCTION paletteOutlier(_x) as InterpolateRGBColor(_x, RGB(165,0,33), RGB(216,38,50),RGB(247,109,94),RGB(255,173,114),RGB(255,224,153),RGB(255,255,191),RGB(224,255,255), RGB(170,247,255),RGB(114,216,255),RGB(63,160,255),RGB(38,76,255) )
+            FUNCTION paletteOutliersLigth(_x) as InterpolateRGBColor(_x, RGB("#FFA78F"), RGB("#FFD9CF") ,RGB("#FFFFFF"),RGB("#BDC9E4"), RGB("#8BA6E4"))
+            FUNCTION paletteTemperature(_x) as InterpolateRGBColor(_x, RGB("#BC2F36"),RGB("#FD7279"), RGB("#FFAC40"),RGB("#8EC3E8"),RGB("#3E94D1"))
+            FUNCTION paletteBlueOrange(_x) as InterpolateRGBColor(_x, RGB(0,127,255),RGB(76,195,255),RGB(153,237,255),RGB(204,255,255), RGB(255,255,204), RGB(255,238,153),RGB(255,195, 76), RGB(255,127,  0) )
+          */
+            FUNCTION palette(_x) as IIF( [Stats].[Stats-Extra].currentmember IS [Stats].[Stats-Extra].[Outliers], paletteOutliers(_x)
+                                        ,IIF( [Stats].[Stats-Extra].currentmember IS [Stats].[Stats-Extra].[Temperature], paletteTemperature(_x)
+                                        ,IIF( [Stats].[Stats-Extra].currentmember IS [Stats].[Stats-Extra].[BlueOrange], paletteBlueOrange(_x)
+                                        ,paletteOutliersLight(_x)
+                                        )))
+            SET counties as topcount([Customers].[Geography].[Country].members,50)
+            MEMBER [01] AS  0, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [02] AS  1, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [03] AS  2, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [04] AS  3, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [05] AS  4, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [06] AS  5, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [07] AS  6, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [08] AS  7, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [09] AS  8, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [10] AS  9, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [11] AS  10, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [12] AS  11, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [13] AS  12, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [14] AS  13, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [15] AS  14, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [16] AS  15, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [17] AS  16, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [18] AS  17, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [19] AS  18, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [20] AS  19, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [21] AS  20, BACK_COLOR=palette( currentCellValue() / 20 ),FORE_COLOR=palette( currentCellValue() / 20 )
+            MEMBER [Stats].[Stats-Extra].[Outliers] as 3
+            MEMBER [Stats].[Stats-Extra].[Temperature] as 3
+            MEMBER [Stats].[Stats-Extra].[BlueOrange] as 3
+            MEMBER [Stats].[Stats-Extra].[Outliers Light] as 3
+          SELECT
+           Measures.allmembers - Measures.members - [Time Evolution] on 0,
+           {[Stats].[Stats-Extra].[Outliers],[Stats].[Stats-Extra].[Outliers Light],[Stats].[Stats-Extra].[Temperature],[Stats].[Stats-Extra].[BlueOrange]} on 1
+          FROM [Sales]
+          CELL PROPERTIES STYLE, VALUE, FORMATTED_VALUE
+    </mdx>
+    <schemaName>Sales</schemaName>
+</mdxQuery>

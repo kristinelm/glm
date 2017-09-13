@@ -1,0 +1,4 @@
+- Codemirror version 5.9.0 (23-11-2015) /** @see node_modules/codemirror */
+- In the Code-Mirror.css we have icCube specific part
+- lint.css, the z-index of .CodeMirror-lint-tooltip is changed, see ZIndexConstants.ts
+- show-hint.css, the z-index of .CodeMirror-hints is changed, see ZIndexConstants.ts

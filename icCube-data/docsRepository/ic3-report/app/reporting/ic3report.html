@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+
+    <title>icCube Reporting - making data talk</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--iPad Compatibility -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="user-scalable=yes"/>
+
+    <link rel="icon" type="image/png" href="../reporting/images/favicon.png"/>
+
+    <style type="text/css">
+        #intro {
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            color: #a9a9a9;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        #loading-msg {
+            margin-left: auto;
+            margin-right: auto;
+            width: 10em;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 40px;
+            background: url('images/ic3report-loadmask.gif') no-repeat 5px 5px;
+            text-align: left;
+        }
+    </style>
+
+    <!-- ic3 bootstrap -->
+    <script src="js/loader/ic3bootstrap.js?v=2017026095037"></script>
+
+    <script type="text/javascript">
+
+        var ic3root = "../" /* DO NOT CHANGE - JCR SETUP */;
+        var ic3rootLocal = "../" /* DO NOT CHANGE - JCR SETUP */;
+
+        var options = {
+
+            root: ic3root,
+            rootLocal: ic3rootLocal,
+
+            callback: function () {
+
+                $('#intro').remove();
+
+                ic3.startReport(
+                        {
+                            <!-- ic3-start-report-options (DO NOT REMOVE - USED TO GENERATE FILES) -->
+                        });
+
+            }
+
+        };
+
+        ic3ready(options);
+
+    </script>
+
+</head>
+<body style='margin:0;height:100%;overflow:hidden;'>
+
+<div id='intro'>
+    <p>Welcome to the icCube Web Reporting.</p>
+
+    <div id='loading'>
+        <div id='loading-msg'>loading libraries...</div>
+    </div>
+</div>
+
+<!-- ic3-body (DO NOT REMOVE - USED TO GENERATE FILES) -->
+
+</body>
+</html>

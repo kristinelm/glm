@@ -20,15 +20,16 @@ knitr::opts_chunk$set(echo = TRUE, tidy = TRUE)
 ```
 
 
-## Loading the data set
-The code available in the assignment text was used for loading the data set.
-
-```{r cars}
+```{r cars,echo=FALSE,message=FALSE}
 library(car)
+library(GGally)
+library(mylm)
 data(SLID, package = "car")
 SLID <- SLID[complete.cases(SLID), ]
+#Create models for use later in report
+model1=mylm(wages ~ education, data = SLID)
+model2=lm(wages ~ education, data = SLID)
 
-library(GGally)
 ```
 
 ## Part 1: Explanatory analysis of the data set
@@ -60,116 +61,82 @@ Comment on the relationships between some of the variables:
 *Language* There are mostly english-speaking people in the data set.   
 
 ## Part 1 continued: Assumptions for a multiple linear regression   
-The assumptions we need make about the data if we want to perform a multiple linear regression analysis to fit a model $Y = X\beta +\epsilon$ are:    
-**Linearity of covariates:** $Y = X\beta + \epsilon$. The continuous variable Y can be written as a linear combination of covariates.  
+The assumptions we need make about the data if we want to perform a multiple linear regression analysis to fit a model $Y=X\beta+\epsilon$ are:    
+**Linearity of covariates:**$Y=X\beta+\epsilon$. The continuous variable Y can be written as a linear combination of covariates.  
 **Homoscedastic error variance:** Cov($\epsilon$)=$\sigma^2$. All the errors have a constant error variance.  
 **Uncorrelated errors**: Cov($\epsilon_i,\epsilon_j$)=0. There is no correlation between the errors.   
-**Additivity of errors:** $Y = X \beta + \epsilon$.   
+**Additivity of errors:** $Y=X\beta+\epsilon$.
 **Expectation of the errors:**  E($\epsilon$) = 0.  The expected value of the errors are zero.    
 **Independence of covariates** If the covariates are stochastic, errors and stochastic covariates are assumed to be independent. The variance and expected value of the errors do not depend on the covariate.  
 **Full rank** The design matrix, X, has full rank.  
-**Assumption of normality:** $\epsilon \sim$N(0,$\sigma^2$). The classical normal linear regression model is obtained if  this holds.  
+**Assumption of normality:** $\epsilon \sim$ Nn(0,$\sigma^2$). The classical normal linear regression model is obtained if  this holds.  
   
 
 ## Part 2: Linear regression with the mylm package 
 **Task a**   
-In this task, we should fill-in the missing parts in the mylm function required to calculate the estimates of the coefficients. This was done by using the formula $\hat{\beta}=(X^TX)^{-1}X^T Y$. The R-code snippet is shown below.
-```{r betahat, eval=FALSE}
-  #Finding estimated coefficients
-  betahat=((solve(t(X)%*%X))%*%t(X))%*%y
+In this task, we should fill-in the missing parts in the mylm function required to calculate the estimates of the coefficients. This was done by using the formula $\hat{\beta}=(X^TX)^{-1}X^T Y$.   
+
+To check the results, a print-function was implemented. Model1 now is the model found using our mylm-package, while model2 is the model found using the lm-package. These will be used throughout task 2 to compare our functions with the built-in functions. Printing the models yields
+```{r print}
+  print(model1)
+print(model2)
 ```
-To check the results, a print-function was implemented as follows:
-```{r print, eval=FALSE}
-  print.mylm <- function(object, ...){
-  # Code here is used when print(object) is used on objects of class "mylm"
-  cat('Coefficients:\n')
-  print.default(x=t(object$coeffs),digits=4,print.gap = 4)
-}
-```
-The output of the command print(model1) then looks like this: 
-HA MED SLIKT OGSÅ???? 
+so the results seems reasonable.
 
 **Task b**  
-To estimate the covariance matrix for the parameter estimates, the formula Var($\hat{\beta}$)=$\sigma^2 X^TX^{-1}$ was used. ${\sigma^2}$ is estimated by the REML estimator  $\hat{\sigma^2}=\frac{1}{n-p}(Y-X\hat{\beta})^T(Y-X\hat{\beta})=\frac{SSE}{n-p}$. The code snippet below shows the implementation.
+To estimate the covariance matrix for the parameter estimates, the formula Var($\hat{\beta}$)=$\sigma^2 X^TX^{-1}$ was used. ${\sigma^2}$ is estimated by the REML estimator  $\hat{\sigma^2}=\frac{1}{n-p}(Y-X\hat{\beta})^T(Y-X\hat{\beta})=\frac{SSE}{n-p}$. 
+The standard error of the intercept and regression coefficient for this model is given by the square root of the corresponding diagonal element of covariance matrix for the parameter estimates.  
 
-```{r covmatrix, eval=FALSE}
-#Finding the estimated sigma
-  sigma2hat=(1/(n-p))*t(y-X%*%betahat)%*%(y-X%*%betahat)
-  sigmahat=sqrt(sigma2hat)
+The significance of the regression coefficients can be found using a z-test, as $T_j=\frac{\hat{\beta_j}-\beta_j}{\sqrt(c_jj)\sigma}\sim t_{n-p}$ approaches the normal distribution when n is large, as in this case. The null hypothesis is that $\beta_j =0$, and $c_{jj}$ is the jj'th element of $(X^TX)^{-1}$. The test statistic thus becomes $\frac{\hat{\beta_j}}{SE(\hat{\beta_j})}$, where $SE(\hat{\beta_j})$ is the standard error of $\hat{\beta}$. The p-value is 2 times the p-value returned by the function p-norm, as we use a 2-sided test in this case.  
 
-  #Finding the covariance matrix of the estimated coefficients
-  varbetahat=sigma2hat[1]*solve(t(X)%*%X)
-```
-The standard error of the intercept and regression coefficient for this model is given by the square root of the corresponding diagonal element of covariance matrix for the parameter estimates. The code for finding the standard errors is
+The function summary was adjusted to include a similar table of tests of significance as summary used on an lm object. Using summary on model1 and model 2 yields
 
-```{r stderrors, eval=FALSE}
-  #Finding the standard errors of the estimated coefficients
-  stderr=(sqrt(diag(varbetahat)))
-  stderror<-c(stderr[[1]],stderr[[2]])
+```{r summary}
+  summary(model1)
+summary(model2)
 ```
 
-The significance of the regression coefficients can be found using a z-test, as $T_j=\frac{\hat{\beta_j}-\beta_j}{\sqrt(c_jj)\sigma}\sim t_{n-p}$ approaches the normal distribution when n is large, as in this case. (SANT????) The null hypothesis is that $\beta_j =0$, and $c_{jj}$ is the jj'th element of $(X^TX)^{-1}$. The test statistic thus becomes $\frac{\hat{\beta_j}}{SE(\hat{\beta_j})}$, where $SE(\hat{\beta_j})$ is the standard error of $\hat{\beta}$. The test statistic and corresponding p-value is found in R as follows:
-```{r testing, eval=FALSE}
-  #Testing the significance of the coefficients 
-  z=numeric(p)
-  pvalue=numeric(p)
-  for(i in 1:p){
-    z[i]<- (betahat[i])/(stderror[i])
-    pvalue[i]= 2*pnorm(-abs(z[i]))
-  }
-```
-
-The function summary was adjusted to includea similar table of tests of significance as summary used on an lm object. See the full code of the summary function for the implementation. HUSK  
 
 The interpretation of the parameter estimates $\hat{\beta_0=4.938}$ and $\hat{\beta_1}= 0.7946$ is that the mean wage of people with no education is 4.938, and the expected pay-off per additional year of education is 0.7946.  
 
 **Task c**
-Task C was to implement a plot function for the mylm class that makes a scatter plot with the fitted values on the x-axis and the raw residuals on the y-axis. The fitted values are $\hat{Y}=X\hat{\beta}$, while the raw residuals are defined as $Y-\hat{Y}=Y-X\hat{\beta}$. The following code snippet was added to the mylm-function, and the values returned form the function in order to be plotted. 
-```{r rawres, eval=FALSE}
-  #Finding fitted values and raw residuals
-  fittedvalues=X%*%betahat
-  rawresiduals=y-X%*%betahat
+Task C was to implement a plot function for the mylm class that makes a scatter plot with the fitted values on the x-axis and the raw residuals on the y-axis. The fitted values are $\hat{Y}=X\hat{\beta}$, while the raw residuals are defined as $Y-\hat{Y}=Y-X\hat{\beta}$. The plot functions yields the following plot: 
+
+```{r plot}
+plot(model1)
 
 ```
-The plot function was implemented as follows: FÅ MED PLOTT OGSÅ HER
-```{r plot, eval=FALSE}
-plot.mylm <- function(object, ...){
-  # Code here is used when plot(object) is used on objects of class "mylm"
-  library(ggplot2)
-  dat <- data.frame(    yvar = object$rres,  xvar = object$fv)
-  ggplot(dat, aes(x=xvar, y=yvar)) +
-    geom_point(shape=1)+labs(x = "Fitted values")  +labs(y = "Raw residuals")
 
-}
 
-```
-**Task d**
-What is the residual sum of squares (SSE) for this model is $SSE=\sum(Y_i-\hat{Y_i})^2=(Y-X\hat{\beta})^T(Y-X\hat{\beta})=225303$ and the degrees of freedom is $n-p=4012$ for this model, as $p$ is the number of estimated coefficients including the intercept and $n$ is the number of observations.  
-The total sum of squares, SST=$\sum(Y_i-\bar{Y})^2$ is 248685.9 for this model.
-These values were found in R using the following code from the mylm-function: 
-```{r SSE, eval=FALSE}
-  #Finding SSE, SST 
-  SSE=t(rawresiduals)%*%rawresiduals
-  SST=t(y-mean(y))%*%(y-mean(y))
-  SSR=SST-SSE
-```
+**Task d**  
+What is the residual sum of squares (SSE) for this model is $SSE=\sum(Y_i-\hat{Y_i})^2=(Y-X\hat{\beta})^T(Y-X\hat{\beta})=225303$ and the degrees of freedom is $n-p=4012$ for this model, as $p$ is the number of estimated coefficients (including the intercept) and $n$ is the number of observations.  
+The total sum of squares, SST=$\sum(Y_i-\bar{Y})^2$ is 248685.9 for this model.  
+
 The significance of the regression can be tested using a $\chi^2$-test, as $F=\frac{(n-p)(SSE_{H_0}-SSE)}{r(SSE)} \sim f_{r,n-p}$, and $rF_{r,n-p}\sim\chi^2_r$, where $SSE_{H_0}$ is the SSE of the model where $H_0$ is true, and $H_0$ is $\beta_j=0  \forall  j$. 
 This test is performed in the anova-function as follows:
 ```{r SSEtest, eval=FALSE}
     Fobs=round(((n-p)/r)*(model[[numComp]]$SSE-model[[length(comp)]]$SSE),2)
     pvalueF=pchisq(r*Fobs,r,lower.tail=FALSE)
 ```
-What is the relationship between the χ2χ2- and zz-statistic?
-The relationship between the $\chi^2$-statistic and the z-statistic is that when r=1, the square root of the $\chi^2$-statistic follows a half-normal distribution.  The critical value is then found as FORKLAR HER
+
+The relationship between the $\chi^2$-statistic and the z-statistic is that when r=1, the absolute value of the square root of the $\chi^2$-statistic follows a half-normal distribution.  The critical value is then found as twice the p-value found using a normal distribution.  
 ```{r ztest, eval=FALSE}
   zstat=sqrt(r*Fobs)
   pvaluez=2*pnorm(-abs(zstat))
 ```
 In the case when only education was tested, a p-value of 1.496245e-92 was found for both test methods.  
-SKRIV OM ANOVA HER
+
+A function, anova, using sequentiel ANOVA, was then implemented. Sequential ANOVA means starting with a model with only the intercept, then adding one covariate, then registering the decrease in SSE as each term in the regression formula is added in turn. The F-statistic $F=\frac{(n-p)(SSE(\beta_i+1|\beta_i,\beta_{i-1},...,\beta_0))}{r(SSE(\beta_k,\beta_{k-1},...,\beta_0))} \sim f_{r,n-p}$ is then used to check if the change in SSE is significant.   
+Note: For checking if $\beta_1$ is significant the $SSE(\beta_1|\beta_0)$ is equal to the SSR for the model including $\beta_1$.  
+Using anova on model1 and model2 yields the following results:
+```{r anova}
+anova(model1)
+anova(model2)
+
+```
 
 **Task e**  
-The “coefficient of determination, $R^2$, is given by $R^2=\frac{SSR}{SST}$, the proportion of variability explained by the model divided by the total variability. For this model, the value is 0.09402572. As $R^2$ is a value between 0 and 1 where 0 means that the nothing is explained, and 1 is that everything is explained, a value of 0.09 indicates that education does not explain much of variability in wages.   
+The “coefficient of determination”, $R^2$, is given by $R^2=\frac{SSR}{SST}$, the proportion of variability explained by the model divided by the total variability. For this model, the value is 0.09402572. As $R^2$ is a value between 0 and 1 where 0 means that the nothing is explained, and 1 is that everything is explained, a value of 0.09 indicates that education does not explain much of variability in wages.   
 
 **Task f**  
 Pearson's linear correlation coefficient is given by $r_{xy}=\frac{\sum(x_i-\bar{x})\sum(y_i-\bar{y})}{\sqrt(\sum(x_i-\bar{x})^2)\sqrt(\sum(y_i-\bar{y})^2)}$, and was implemented in R as follows:
